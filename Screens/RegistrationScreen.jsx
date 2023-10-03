@@ -5,7 +5,10 @@ import {
   Text,
   Image,
   View,
+  Pressable,
+  Alert,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import PhotoBG from "../Images/PhotoBG.png";
 import avatar from "../Images/ava-177.jpg";
@@ -43,9 +46,18 @@ const RegistrationScreen = () => {
               placeholderTextColor={"#BDBDBD"}
               style={styles.input}
             ></TextInput>
-            <View>
+            <Pressable
+              onPress={() => Alert.alert("Button pressed")}
+              style={styles.primaryBtn}
+            >
               <Text style={styles.btnText}>{"Зареєстуватися"}</Text>
-            </View>
+            </Pressable>
+            <TouchableOpacity
+              style={styles.secTextBtn}
+              onPress={() => Alert.alert("Login exist pressed")}
+            >
+              <Text style={styles.secText}>Вже є акаунт? Увійти</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ImageBackground>
@@ -103,15 +115,34 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     textAlign: "center",
     color: "#212121",
-    fontFamily: "Roboto",
+    //fontFamily: "Roboto",
     fontWeight: "500",
     marginBottom: 33,
+  },
+  primaryBtn: {
+    marginTop: 27,
+    marginBottom: 16,
+    borderRadius: 100,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    backgroundColor: "#FF6C00",
+    height: 51,
   },
   btnText: {
     color: "#FFF",
     textAlign: "center",
     fontSize: 16,
     lineHeight: 19,
+  },
+  secTextBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+  },
+  secText: {
+    fontSize: 16,
+    color: "#1B4371",
   },
 });
 
