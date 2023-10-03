@@ -1,6 +1,14 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  TextInput,
+} from "react-native";
 import PhotoBG from "../Images/PhotoBG.png";
+import avatar from "../Images/ava-177.jpg";
 
 const RegistrationScreen = () => {
   return (
@@ -13,7 +21,30 @@ const RegistrationScreen = () => {
         <View style={styles.container}>
           <View style={styles.regFormaBox}>
             <View style={styles.avatarBox}>
-              <View style={styles.avatar}></View>
+              <View style={styles.avatar}>
+                <Image source={avatar} style={styles.avatar} />
+              </View>
+            </View>
+            <View>
+              <Text style={styles.formTitle}>{"Реєстрація"}</Text>
+            </View>
+            <TextInput
+              placeholder="Логін"
+              placeholderTextColor={"#BDBDBD"}
+              style={styles.input}
+            ></TextInput>
+            <TextInput
+              placeholder="Адреса електронної пошти"
+              placeholderTextColor={"#BDBDBD"}
+              style={styles.input}
+            ></TextInput>
+            <TextInput
+              placeholder="Пароль"
+              placeholderTextColor={"#BDBDBD"}
+              style={styles.input}
+            ></TextInput>
+            <View>
+              <Text style={styles.btnText}>{"Зареєстуватися"}</Text>
             </View>
           </View>
         </View>
@@ -56,6 +87,31 @@ const styles = StyleSheet.create({
     zIndex: 2,
     top: -60,
     alignSelf: "center",
+  },
+  input: {
+    backgroundColor: "#F6F6F6",
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#E8E8E8",
+    borderRadius: 10,
+    padding: 16,
+    marginBottom: 16,
+    fontSize: 16,
+  },
+  formTitle: {
+    fontSize: 30,
+    letterSpacing: 0.3,
+    textAlign: "center",
+    color: "#212121",
+    fontFamily: "Roboto",
+    fontWeight: "500",
+    marginBottom: 33,
+  },
+  btnText: {
+    color: "#FFF",
+    textAlign: "center",
+    fontSize: 16,
+    lineHeight: 19,
   },
 });
 
