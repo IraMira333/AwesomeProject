@@ -37,7 +37,7 @@ const RegistrationScreen = () => {
         <ImageBackground
           style={styles.background}
           source={PhotoBG}
-          resizeMethod="resize"
+          resizeMode="cover"
         >
           <View style={styles.container}>
             <View style={styles.regFormaBox}>
