@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import PhotoBG from "../Images/PhotoBG.png";
