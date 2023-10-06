@@ -4,9 +4,12 @@ import { StyleSheet, Text, View } from "react-native";
 import RegistrationScreen from "./Screens/RegistrationScreen";
 
 export default function App() {
-  useFonts({
-    Roboto: require("./assets/fonts/Roboto-Medium.ttf"),
+  const [fontsLoaded] = useFonts({
+    "Roboto-Black": require("./assets/fonts/Roboto-Black.ttf"),
+    "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
+    "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
   });
+
   return <RegistrationScreen />;
 }
 
