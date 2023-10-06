@@ -24,6 +24,7 @@ const RegistrationScreen = () => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [focusedInput, setFocusedInput] = useState(null);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -80,16 +81,26 @@ const RegistrationScreen = () => {
                 autoFocus
                 placeholder="Логін"
                 onChangeText={setLogin}
+                onFocus={() => setFocusedInput("login")}
+                onBlur={() => setFocusedInput(null)}
                 placeholderTextColor={"#BDBDBD"}
-                style={styles.input}
+                style={[
+                  styles.input,
+                  focusedInput === "login" && styles.focusedInput,
+                ]}
               ></TextInput>
               <TextInput
                 placeholder="Адреса електронної пошти"
                 onChangeText={setEmail}
                 inputMode="email"
                 keyboardType="email-address"
+                onFocus={() => setFocusedInput("email")}
+                onBlur={() => setFocusedInput(null)}
                 placeholderTextColor={"#BDBDBD"}
-                style={styles.input}
+                style={[
+                  styles.input,
+                  focusedInput === "email" && styles.focusedInput,
+                ]}
               ></TextInput>
               <View>
                 <TextInput
@@ -97,7 +108,12 @@ const RegistrationScreen = () => {
                   onChangeText={setPassword}
                   secureTextEntry={hidePassword}
                   placeholderTextColor={"#BDBDBD"}
-                  style={styles.input}
+                  onFocus={() => setFocusedInput("password")}
+                  onBlur={() => setFocusedInput(null)}
+                  style={[
+                    styles.input,
+                    focusedInput === "password" && styles.focusedInput,
+                  ]}
                 ></TextInput>
                 <TouchableOpacity
                   onPress={() => setHidePassword(!hidePassword)}
@@ -183,6 +199,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     fontSize: 16,
   },
+  focusedInput: { borderColor: "#FF6C00", backgroundColor: "#FFFFFF" },
   svgContainer: {
     width: 25,
     height: 25,
