@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -8,60 +8,124 @@ import {
   Pressable,
   Alert,
   TextInput,
+  KeyboardAvoidingView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import PhotoBG from "../Images/PhotoBG.png";
 import avatar from "../Images/ava-177.jpg";
 
+//const avatar = null;
+
 const RegistrationScreen = () => {
+  const [hidePassword, setHidePassword] = React.useState(true);
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        style={styles.background}
-        source={PhotoBG}
-        resizeMode="cover"
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={-147}
+        style={styles.container}
       >
-        <View style={styles.container}>
-          <View style={styles.regFormaBox}>
-            <View style={styles.avatarBox}>
-              <View style={styles.avatar}>
-                <Image source={avatar} style={styles.avatar} />
+        <ImageBackground
+          style={styles.background}
+          source={PhotoBG}
+          resizeMethod="resize"
+        >
+          <View style={styles.container}>
+            <View style={styles.regFormaBox}>
+              <View style={styles.avatarBox}>
+                <View style={styles.avatar}>
+                  <Image source={avatar} style={styles.avatar} />
+                </View>
+                {avatar ? (
+                  <Pressable
+                    onPress={() => alert("Delete image")}
+                    style={({ pressed }) => [
+                      styles.avatarBtn,
+                      pressed && styles.avatarBtnPressed,
+                    ]}
+                  >
+                    <View style={styles.svgContainer}>
+                      <AntDesign
+                        name="closecircleo"
+                        size={24}
+                        color="#BDBDBD"
+                      />
+                    </View>
+                  </Pressable>
+                ) : (
+                  <Pressable
+                    onPress={() => alert("Add image")}
+                    style={({ pressed }) => [
+                      styles.avatarBtn,
+                      pressed && styles.avatarBtnPressed,
+                    ]}
+                  >
+                    <View style={styles.svgContainer}>
+                      <AntDesign name="pluscircleo" size={25} color="#FF6C00" />
+                    </View>
+                  </Pressable>
+                )}
               </View>
+              <View>
+                <Text style={styles.formTitle}>{"Реєстрація"}</Text>
+              </View>
+              <TextInput
+                autoFocus
+                placeholder="Логін"
+                onChangeText={setLogin}
+                placeholderTextColor={"#BDBDBD"}
+                style={styles.input}
+              ></TextInput>
+              <TextInput
+                placeholder="Адреса електронної пошти"
+                onChangeText={setEmail}
+                inputMode="email"
+                keyboardType="email-address"
+                placeholderTextColor={"#BDBDBD"}
+                style={styles.input}
+              ></TextInput>
+              <View>
+                <TextInput
+                  placeholder="Пароль"
+                  onChangeText={setPassword}
+                  secureTextEntry={hidePassword}
+                  placeholderTextColor={"#BDBDBD"}
+                  style={styles.input}
+                ></TextInput>
+                <TouchableOpacity
+                  onPress={() => setHidePassword(!hidePassword)}
+                  style={styles.hideBtn}
+                >
+                  <Text style={styles.hideBtnText}>
+                    {hidePassword ? "Показати" : "Сховати"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <Pressable
+                onPress={() => Alert.alert("Button pressed")}
+                style={styles.primaryBtn}
+              >
+                <Text style={styles.btnText}>{"Зареєстуватися"}</Text>
+              </Pressable>
+              <TouchableOpacity
+                style={styles.secTextBtn}
+                onPress={() => alert("Login exist pressed")}
+              >
+                <Text style={styles.secText}>Вже є акаунт? </Text>
+                <Text style={[styles.secText, styles.underlined]}>Увійти</Text>
+              </TouchableOpacity>
             </View>
-            <View>
-              <Text style={styles.formTitle}>{"Реєстрація"}</Text>
-            </View>
-            <TextInput
-              placeholder="Логін"
-              placeholderTextColor={"#BDBDBD"}
-              style={styles.input}
-            ></TextInput>
-            <TextInput
-              placeholder="Адреса електронної пошти"
-              placeholderTextColor={"#BDBDBD"}
-              style={styles.input}
-            ></TextInput>
-            <TextInput
-              placeholder="Пароль"
-              placeholderTextColor={"#BDBDBD"}
-              style={styles.input}
-            ></TextInput>
-            <Pressable
-              onPress={() => Alert.alert("Button pressed")}
-              style={styles.primaryBtn}
-            >
-              <Text style={styles.btnText}>{"Зареєстуватися"}</Text>
-            </Pressable>
-            <TouchableOpacity
-              style={styles.secTextBtn}
-              onPress={() => Alert.alert("Login exist pressed")}
-            >
-              <Text style={styles.secText}>Вже є акаунт? Увійти</Text>
-            </TouchableOpacity>
           </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -100,6 +164,15 @@ const styles = StyleSheet.create({
     top: -60,
     alignSelf: "center",
   },
+  avatarBtn: {
+    position: "absolute",
+    zIndex: 3,
+    top: 76,
+    right: -12.5,
+    borderRadius: 50,
+    overflow: "hidden",
+    backgroundColor: "#FFFFFF",
+  },
   input: {
     backgroundColor: "#F6F6F6",
     height: 50,
@@ -110,12 +183,18 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     fontSize: 16,
   },
+  svgContainer: {
+    width: 25,
+    height: 25,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   formTitle: {
     fontSize: 30,
     letterSpacing: 0.3,
     textAlign: "center",
     color: "#212121",
-    //fontFamily: "Roboto",
+    fontFamily: "Roboto-Medium",
     fontWeight: "500",
     marginBottom: 33,
   },
@@ -144,6 +223,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#1B4371",
   },
+  underlined: {
+    textDecorationLine: "underline",
+    textDecorationStyle: "solid",
+    textDecorationColor: "#1B4371",
+  },
+  hideBtn: {
+    position: "absolute",
+    right: 16,
+    top: 16,
+  },
+  hideBtnText: { color: "#1B4371", fontSize: 16 },
 });
 
 export default RegistrationScreen;
