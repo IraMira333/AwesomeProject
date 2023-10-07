@@ -30,7 +30,7 @@ const LoginScreen = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={-90}
+        keyboardVerticalOffset={-227}
         style={styles.container}
       >
         <ImageBackground
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     paddingHorizontal: 16,
-    paddingTop: 92,
+    paddingTop: 32,
     paddingBottom: 78,
   },
   avatar: {
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     textAlign: "center",
     color: "#212121",
-    fontFamily: "Roboto",
+    fontFamily: "RobotoMedium",
     fontWeight: "500",
     marginBottom: 33,
   },
