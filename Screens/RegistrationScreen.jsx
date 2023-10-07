@@ -31,7 +31,7 @@ const RegistrationScreen = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={-147}
+        keyboardVerticalOffset={-203}
         style={styles.container}
       >
         <ImageBackground
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     textAlign: "center",
     color: "#212121",
-    fontFamily: "Roboto-Medium",
+    fontFamily: "Roboto",
     fontWeight: "500",
     marginBottom: 33,
   },
