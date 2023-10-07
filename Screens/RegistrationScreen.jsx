@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     textAlign: "center",
     color: "#212121",
-    fontFamily: "Roboto",
+    fontFamily: "Roboto-Medium",
     fontWeight: "500",
     marginBottom: 33,
   },
