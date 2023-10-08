@@ -19,9 +19,9 @@ export default function App() {
   // if (!fontsLoaded) {
   //   SplashScreen.hideAsync();
   // }
-  let [fontsLoaded] = useFonts({
-    RobotoMedium: require("./src/assets/fonts/Roboto-Medium.ttf"),
-    RobotoRegular: require("./src/assets/fonts/Roboto-Regular.ttf"),
+  const [fontsLoaded] = useFonts({
+    "Roboto-Medium": require("./src/assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-Regular": require("./src/assets/fonts/Roboto-Regular.ttf"),
   });
   if (!fontsLoaded) {
     SplashScreen.hideAsync();
