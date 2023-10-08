@@ -29,119 +29,129 @@ const RegistrationScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={-203}
-        style={styles.container}
-      >
+      <View style={styles.container}>
         <ImageBackground
           style={styles.background}
           source={PhotoBG}
           resizeMode="cover"
         >
-          <View style={styles.container}>
-            <View style={styles.regFormaBox}>
-              <View style={styles.avatarBox}>
-                <View style={styles.avatar}>
-                  <Image source={avatar} style={styles.avatar} />
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={-190}
+          >
+            <View style={styles.container}>
+              <View style={styles.regFormaBox}>
+                <View style={styles.avatarBox}>
+                  <View style={styles.avatar}>
+                    <Image source={avatar} style={styles.avatar} />
+                  </View>
+                  {avatar ? (
+                    <Pressable
+                      onPress={() => alert("Delete image")}
+                      style={({ pressed }) => [
+                        styles.avatarBtn,
+                        pressed && styles.avatarBtnPressed,
+                      ]}
+                    >
+                      <View style={styles.svgContainer}>
+                        <AntDesign
+                          name="closecircleo"
+                          size={24}
+                          color="#BDBDBD"
+                        />
+                      </View>
+                    </Pressable>
+                  ) : (
+                    <Pressable
+                      onPress={() => alert("Add image")}
+                      style={({ pressed }) => [
+                        styles.avatarBtn,
+                        pressed && styles.avatarBtnPressed,
+                      ]}
+                    >
+                      <View style={styles.svgContainer}>
+                        <AntDesign
+                          name="pluscircleo"
+                          size={25}
+                          color="#FF6C00"
+                        />
+                      </View>
+                    </Pressable>
+                  )}
                 </View>
-                {avatar ? (
-                  <Pressable
-                    onPress={() => alert("Delete image")}
-                    style={({ pressed }) => [
-                      styles.avatarBtn,
-                      pressed && styles.avatarBtnPressed,
-                    ]}
-                  >
-                    <View style={styles.svgContainer}>
-                      <AntDesign
-                        name="closecircleo"
-                        size={24}
-                        color="#BDBDBD"
-                      />
-                    </View>
-                  </Pressable>
-                ) : (
-                  <Pressable
-                    onPress={() => alert("Add image")}
-                    style={({ pressed }) => [
-                      styles.avatarBtn,
-                      pressed && styles.avatarBtnPressed,
-                    ]}
-                  >
-                    <View style={styles.svgContainer}>
-                      <AntDesign name="pluscircleo" size={25} color="#FF6C00" />
-                    </View>
-                  </Pressable>
-                )}
-              </View>
-              <View>
+
                 <Text style={styles.formTitle}>{"Реєстрація"}</Text>
-              </View>
-              <TextInput
-                autoFocus
-                placeholder="Логін"
-                onChangeText={setLogin}
-                onFocus={() => setFocusedInput("login")}
-                onBlur={() => setFocusedInput(null)}
-                placeholderTextColor={"#BDBDBD"}
-                style={[
-                  styles.input,
-                  focusedInput === "login" && styles.focusedInput,
-                ]}
-              ></TextInput>
-              <TextInput
-                placeholder="Адреса електронної пошти"
-                onChangeText={setEmail}
-                inputMode="email"
-                keyboardType="email-address"
-                onFocus={() => setFocusedInput("email")}
-                onBlur={() => setFocusedInput(null)}
-                placeholderTextColor={"#BDBDBD"}
-                style={[
-                  styles.input,
-                  focusedInput === "email" && styles.focusedInput,
-                ]}
-              ></TextInput>
-              <View>
+
                 <TextInput
-                  placeholder="Пароль"
-                  onChangeText={setPassword}
-                  secureTextEntry={hidePassword}
-                  placeholderTextColor={"#BDBDBD"}
-                  onFocus={() => setFocusedInput("password")}
+                  autoFocus
+                  placeholder="Логін"
+                  onChangeText={setLogin}
+                  onFocus={() => setFocusedInput("login")}
                   onBlur={() => setFocusedInput(null)}
+                  placeholderTextColor={"#BDBDBD"}
                   style={[
                     styles.input,
-                    focusedInput === "password" && styles.focusedInput,
+                    focusedInput === "login" && styles.focusedInput,
                   ]}
                 ></TextInput>
-                <TouchableOpacity
-                  onPress={() => setHidePassword(!hidePassword)}
-                  style={styles.hideBtn}
+                <TextInput
+                  placeholder="Адреса електронної пошти"
+                  onChangeText={setEmail}
+                  inputMode="email"
+                  keyboardType="email-address"
+                  onFocus={() => setFocusedInput("email")}
+                  onBlur={() => setFocusedInput(null)}
+                  placeholderTextColor={"#BDBDBD"}
+                  style={[
+                    styles.input,
+                    focusedInput === "email" && styles.focusedInput,
+                  ]}
+                ></TextInput>
+                <View>
+                  <TextInput
+                    placeholder="Пароль"
+                    onChangeText={setPassword}
+                    secureTextEntry={hidePassword}
+                    placeholderTextColor={"#BDBDBD"}
+                    onFocus={() => setFocusedInput("password")}
+                    onBlur={() => setFocusedInput(null)}
+                    style={[
+                      styles.input,
+                      focusedInput === "password" && styles.focusedInput,
+                    ]}
+                  ></TextInput>
+                  <TouchableOpacity
+                    onPress={() => setHidePassword(!hidePassword)}
+                    style={styles.hideBtn}
+                  >
+                    <Text style={styles.hideBtnText}>
+                      {hidePassword ? "Показати" : "Сховати"}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <Pressable
+                  onPress={() => Alert.alert("Button pressed")}
+                  style={({ pressed }) => [
+                    styles.primaryBtn,
+                    pressed && styles.primaryBtnPressed,
+                  ]}
                 >
-                  <Text style={styles.hideBtnText}>
-                    {hidePassword ? "Показати" : "Сховати"}
+                  <Text style={styles.btnText}>{"Зареєстуватися"}</Text>
+                </Pressable>
+                <TouchableOpacity
+                  style={styles.secTextBtn}
+                  onPress={() => alert("Login exist pressed")}
+                >
+                  <Text style={styles.secText}>Вже є акаунт? </Text>
+                  <Text style={[styles.secText, styles.underlined]}>
+                    Увійти
                   </Text>
                 </TouchableOpacity>
               </View>
-              <Pressable
-                onPress={() => Alert.alert("Button pressed")}
-                style={styles.primaryBtn}
-              >
-                <Text style={styles.btnText}>{"Зареєстуватися"}</Text>
-              </Pressable>
-              <TouchableOpacity
-                style={styles.secTextBtn}
-                onPress={() => alert("Login exist pressed")}
-              >
-                <Text style={styles.secText}>Вже є акаунт? </Text>
-                <Text style={[styles.secText, styles.underlined]}>Увійти</Text>
-              </TouchableOpacity>
             </View>
-          </View>
+          </KeyboardAvoidingView>
         </ImageBackground>
-      </KeyboardAvoidingView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };
@@ -154,8 +164,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   background: {
-    bottom: 0,
-    top: 0,
     flex: 1,
     width: "100%",
   },
@@ -225,6 +233,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF6C00",
     height: 51,
   },
+  primaryBtnPressed: { backgroundColor: "#ff6a00ab" },
   btnText: {
     color: "#FFF",
     textAlign: "center",
