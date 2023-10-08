@@ -8,8 +8,8 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
 import { StyleSheet, Text, View } from "react-native";
-import RegistrationScreen from "./Screens/RegistrationScreen";
-import LoginScreen from "./Screens/LoginScreen";
+import RegistrationScreen from "./src/Screens/RegistrationScreen";
+import LoginScreen from "./src/Screens/LoginScreen";
 
 export default function App() {
   // const [fontsLoaded] = useFonts({
@@ -20,8 +20,8 @@ export default function App() {
   //   SplashScreen.hideAsync();
   // }
   let [fontsLoaded] = useFonts({
-    RobotoMedium: require("./assets/fonts/Roboto-Medium.ttf"),
-    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    RobotoMedium: require("./src/assets/fonts/Roboto-Medium.ttf"),
+    RobotoRegular: require("./src/assets/fonts/Roboto-Regular.ttf"),
   });
   if (!fontsLoaded) {
     SplashScreen.hideAsync();
