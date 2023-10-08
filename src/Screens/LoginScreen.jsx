@@ -3,7 +3,6 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
-  Image,
   View,
   Pressable,
   Alert,
@@ -13,91 +12,89 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import PhotoBG from "../Images/PhotoBG.png";
-import avatar from "../Images/ava-177.jpg";
 
-//const avatar = null;
+import PhotoBG from "../Images/PhotoBG.png";
 
 const LoginScreen = () => {
   const [hidePassword, setHidePassword] = React.useState(true);
-  const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [focusedInput, setFocusedInput] = useState(null);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={-227}
-        style={styles.container}
-      >
+      <View style={styles.container}>
         <ImageBackground
           style={styles.background}
           source={PhotoBG}
-          resizeMethod="resize"
+          resizeMode="cover"
         >
-          <View style={styles.container}>
-            <View style={styles.regFormaBox}>
-              <View>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={-170}
+          >
+            <View style={styles.container}>
+              <View style={styles.regFormaBox}>
                 <Text style={styles.formTitle}>{"Увійти"}</Text>
-              </View>
 
-              <TextInput
-                placeholder="Адреса електронної пошти"
-                onChangeText={setEmail}
-                inputMode="email"
-                keyboardType="email-address"
-                onFocus={() => setFocusedInput("email")}
-                onBlur={() => setFocusedInput(null)}
-                placeholderTextColor={"#BDBDBD"}
-                style={[
-                  styles.input,
-                  focusedInput === "email" && styles.focusedInput,
-                ]}
-              ></TextInput>
-              <View>
                 <TextInput
-                  placeholder="Пароль"
-                  onChangeText={setPassword}
-                  secureTextEntry={hidePassword}
-                  placeholderTextColor={"#BDBDBD"}
-                  onFocus={() => setFocusedInput("password")}
+                  placeholder="Адреса електронної пошти"
+                  onChangeText={setEmail}
+                  inputMode="email"
+                  keyboardType="email-address"
+                  onFocus={() => setFocusedInput("email")}
                   onBlur={() => setFocusedInput(null)}
+                  placeholderTextColor={"#BDBDBD"}
                   style={[
                     styles.input,
-                    focusedInput === "password" && styles.focusedInput,
+                    focusedInput === "email" && styles.focusedInput,
                   ]}
                 ></TextInput>
-                <TouchableOpacity
-                  onPress={() => setHidePassword(!hidePassword)}
-                  style={styles.hideBtn}
+                <View>
+                  <TextInput
+                    placeholder="Пароль"
+                    onChangeText={setPassword}
+                    secureTextEntry={hidePassword}
+                    placeholderTextColor={"#BDBDBD"}
+                    onFocus={() => setFocusedInput("password")}
+                    onBlur={() => setFocusedInput(null)}
+                    style={[
+                      styles.input,
+                      focusedInput === "password" && styles.focusedInput,
+                    ]}
+                  ></TextInput>
+                  <TouchableOpacity
+                    onPress={() => setHidePassword(!hidePassword)}
+                    style={styles.hideBtn}
+                  >
+                    <Text style={styles.hideBtnText}>
+                      {hidePassword ? "Показати" : "Сховати"}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <Pressable
+                  onPress={() => Alert.alert("Button pressed")}
+                  style={({ pressed }) => [
+                    styles.primaryBtn,
+                    pressed && styles.primaryBtnPressed,
+                  ]}
                 >
-                  <Text style={styles.hideBtnText}>
-                    {hidePassword ? "Показати" : "Сховати"}
+                  <Text style={styles.btnText}>{"Увійти"}</Text>
+                </Pressable>
+                <TouchableOpacity
+                  style={styles.secTextBtn}
+                  onPress={() => alert("Login exist pressed")}
+                >
+                  <Text style={styles.secText}>Немає акаунту? </Text>
+                  <Text style={[styles.secText, styles.underlined]}>
+                    Зареєструватися
                   </Text>
                 </TouchableOpacity>
               </View>
-              <Pressable
-                onPress={() => Alert.alert("Button pressed")}
-                style={styles.primaryBtn}
-              >
-                <Text style={styles.btnText}>{"Зареєстуватися"}</Text>
-              </Pressable>
-              <TouchableOpacity
-                style={styles.secTextBtn}
-                onPress={() => alert("Login exist pressed")}
-              >
-                <Text style={styles.secText}>Немає акаунту? </Text>
-                <Text style={[styles.secText, styles.underlined]}>
-                  Зареєструватися
-                </Text>
-              </TouchableOpacity>
             </View>
-          </View>
+          </KeyboardAvoidingView>
         </ImageBackground>
-      </KeyboardAvoidingView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };
@@ -110,8 +107,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   background: {
-    bottom: 0,
-    top: 0,
     flex: 1,
     width: "100%",
   },
@@ -182,6 +177,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF6C00",
     height: 51,
   },
+  primaryBtnPressed: { backgroundColor: "#ff6a00ab" },
   btnText: {
     color: "#FFF",
     textAlign: "center",
