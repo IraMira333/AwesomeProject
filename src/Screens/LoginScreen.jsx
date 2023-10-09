@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from "react-native";
 
 import PhotoBG from "../Images/PhotoBG.png";
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     textAlign: "center",
     color: "#212121",
-    fontFamily: "RobotoMedium",
+    fontFamily: "Roboto-Medium",
     fontWeight: "500",
     marginBottom: 33,
   },
