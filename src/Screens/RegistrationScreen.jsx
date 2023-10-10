@@ -27,6 +27,11 @@ const RegistrationScreen = () => {
   const [password, setPassword] = useState("");
   const [focusedInput, setFocusedInput] = useState(null);
 
+  const onLogin = () => {
+    Alert.alert("Credentials", `${login} + ${email} + ${password}`);
+    console.log("Credentials:", `${login} , ${email} , ${password}`);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -130,7 +135,7 @@ const RegistrationScreen = () => {
                   </TouchableOpacity>
                 </View>
                 <Pressable
-                  onPress={() => Alert.alert("Button pressed")}
+                  onPress={onLogin}
                   style={({ pressed }) => [
                     styles.primaryBtn,
                     pressed && styles.primaryBtnPressed,
