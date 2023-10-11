@@ -13,6 +13,7 @@ import {
   Keyboard,
   Platform,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import PhotoBG from "../Images/PhotoBG.png";
 
@@ -21,6 +22,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [focusedInput, setFocusedInput] = useState(null);
+  const navigation = useNavigation();
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -84,7 +86,7 @@ const LoginScreen = () => {
                 </Pressable>
                 <TouchableOpacity
                   style={styles.secTextBtn}
-                  onPress={() => alert("Login exist pressed")}
+                  onPress={() => navigation.navigate("Registration")}
                 >
                   <Text style={styles.secText}>Немає акаунту? </Text>
                   <Text style={[styles.secText, styles.underlined]}>
@@ -203,7 +205,7 @@ const styles = StyleSheet.create({
   hideBtn: {
     position: "absolute",
     right: 16,
-    top: 16,
+    top: 13,
   },
   hideBtnText: { color: "#1B4371", fontSize: 16 },
 });
