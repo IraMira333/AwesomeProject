@@ -14,6 +14,7 @@ import {
   Keyboard,
   Platform,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import PhotoBG from "../Images/PhotoBG.png";
 import avatar from "../Images/ava-177.jpg";
@@ -26,7 +27,7 @@ const RegistrationScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [focusedInput, setFocusedInput] = useState(null);
-
+  const navigation = useNavigation();
   const onLogin = () => {
     Alert.alert("Credentials", `${login} + ${email} + ${password}`);
     console.log("Credentials:", `${login} , ${email} , ${password}`);
@@ -145,7 +146,7 @@ const RegistrationScreen = () => {
                 </Pressable>
                 <TouchableOpacity
                   style={styles.secTextBtn}
-                  onPress={() => alert("Login exist pressed")}
+                  onPress={() => navigation.navigate("Login")}
                 >
                   <Text style={styles.secText}>Вже є акаунт? </Text>
                   <Text style={[styles.secText, styles.underlined]}>
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
   hideBtn: {
     position: "absolute",
     right: 16,
-    top: 16,
+    top: 13,
   },
   hideBtnText: { color: "#1B4371", fontSize: 16 },
 });
