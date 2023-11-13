@@ -10,6 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet, Text, View } from "react-native";
 import RegistrationScreen from "./src/Screens/RegistrationScreen";
 import LoginScreen from "./src/Screens/LoginScreen";
+import CreatePostsScreen from "./src/Screens/CreatePostsScreen";
 
 const MainStack = createStackNavigator();
 
@@ -33,7 +34,7 @@ export default function App() {
       <MainStack.Navigator initialRouteName="Login">
         <MainStack.Screen
           name="Registration"
-          component={RegistrationScreen}
+          component={CreatePostsScreen}
           options={{ headerShown: false }}
         />
         <MainStack.Screen
