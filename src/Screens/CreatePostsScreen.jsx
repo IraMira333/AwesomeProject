@@ -12,7 +12,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
 } from "react-native";
-
+import { FontAwesome } from "@expo/vector-icons";
 import Forest from "../Images/Forest.jpg";
 
 import { Feather } from "@expo/vector-icons";
@@ -45,59 +45,76 @@ const CreatePostsScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Pressable onPress={() => Alert.alert("Button pressed")}>
-          <Feather name="arrow-left" size={24} color="#212121CC" />
-        </Pressable>
+        <View>
+          <Pressable onPress={() => Alert.alert("Button pressed")}>
+            <Feather name="arrow-left" size={24} color="#212121CC" />
+          </Pressable>
 
-        <Text>Створити публікацію</Text>
-        <View style={styles.postImgContainer}>
-          <Image source={imgURI} style={styles.image} />
-        </View>
+          <Text>Створити публікацію</Text>
+          <View style={styles.postImgContainer}>
+            <Image source={imgURI} style={styles.image} />
 
-        <Text style={styles.addFotoText}>
-          {imgURI ? "Завантажте фотоo" : "Редагувати фото"}
-        </Text>
-        <View style={styles.inputWrap}>
-          <TextInput
-            placeholder="Назва..."
-            placeholderTextColor="#BDBDBD"
-            style={[styles.input, focusedInput.title && styles.focusedInput]}
-            onFocus={() => onFocus("title")}
-            onBlur={() => onBlur("title")}
-            onChangeText={(text) => handleInputChange("title", text)}
-          ></TextInput>
-        </View>
-        <View style={styles.inputWrap}>
-          <Feather
-            name="map-pin"
-            size={24}
-            color="#BDBDBD"
-            style={styles.locationIcon}
-          />
-          <TextInput
-            placeholder="Місцевість..."
-            placeholderTextColor="#BDBDBD"
-            onFocus={() => onFocus("location")}
-            onBlur={() => onBlur("location")}
-            onChangeText={(text) => handleInputChange("location", text)}
-            defaultValue={postData.location}
-            style={[
-              styles.input,
-              styles.locationInput,
-              focusedInput.location && styles.focusedInput,
+            <View style={styles.cameraWrap}>
+              <Pressable
+                style={[
+                  styles.cameraRoundBox,
+                  postData.image && styles.cameraWithImage,
+                ]}
+              >
+                <FontAwesome
+                  name="camera"
+                  size={24}
+                  color={postData.image ? "#FFFFFF" : "#BDBDBD"}
+                />
+              </Pressable>
+            </View>
+          </View>
+          <Text style={styles.addFotoText}>
+            {imgURI ? "Завантажте фотоo" : "Редагувати фото"}
+          </Text>
+          <View style={styles.inputWrap}>
+            <TextInput
+              placeholder="Назва..."
+              placeholderTextColor="#BDBDBD"
+              style={[styles.input, focusedInput.title && styles.focusedInput]}
+              onFocus={() => onFocus("title")}
+              onBlur={() => onBlur("title")}
+              onChangeText={(text) => handleInputChange("title", text)}
+            ></TextInput>
+          </View>
+          <View style={styles.inputWrap}>
+            <Feather
+              name="map-pin"
+              size={24}
+              color="#BDBDBD"
+              style={styles.locationIcon}
+            />
+            <TextInput
+              placeholder="Місцевість..."
+              placeholderTextColor="#BDBDBD"
+              onFocus={() => onFocus("location")}
+              onBlur={() => onBlur("location")}
+              onChangeText={(text) => handleInputChange("location", text)}
+              defaultValue={postData.location}
+              style={[
+                styles.input,
+                styles.locationInput,
+                focusedInput.location && styles.focusedInput,
+              ]}
+            ></TextInput>
+          </View>
+
+          <Pressable
+            onPress={() => Alert.alert("Button pressed")}
+            style={({ pressed }) => [
+              styles.primaryBtn,
+              pressed && styles.primaryBtnPressed,
             ]}
-          ></TextInput>
+          >
+            <Text style={styles.btnText}>{"Опублікувати"}</Text>
+          </Pressable>
         </View>
 
-        <Pressable
-          onPress={() => Alert.alert("Button pressed")}
-          style={({ pressed }) => [
-            styles.primaryBtn,
-            pressed && styles.primaryBtnPressed,
-          ]}
-        >
-          <Text style={styles.btnText}>{"Опублікувати"}</Text>
-        </Pressable>
         <View style={styles.trashWrap}>
           <Pressable
             onPress={onDeletePost}
@@ -147,10 +164,30 @@ const styles = StyleSheet.create({
     borderBottomColor: "#E8E8E8",
     borderBottomWidth: 1,
   },
+  cameraWrap: {
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    zIndex: 2,
+  },
+  cameraRoundBox: {
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 2,
+  },
+  cameraWithImage: {
+    backgroundColor: "rgba(255, 255, 255, 0.30)",
+  },
   addFotoText: {
     color: "#BDBDBD",
     fontSize: 16,
     fontWeight: "400",
+    marginBottom: 16,
+    marginTop: 8,
   },
   input: {
     fontSize: 16,
@@ -166,17 +203,17 @@ const styles = StyleSheet.create({
     marginLeft: 28,
   },
   primaryBtn: {
-    marginTop: 27,
+    marginTop: 32,
     marginBottom: 16,
     borderRadius: 100,
     paddingVertical: 16,
     paddingHorizontal: 32,
-    backgroundColor: "#FF6C00",
+    backgroundColor: "#F6F6F6",
     height: 51,
   },
   primaryBtnPressed: { backgroundColor: "#ff6a00ab" },
   btnText: {
-    color: "#FFF",
+    color: "#BDBDBD",
     textAlign: "center",
     fontSize: 16,
     lineHeight: 19,
