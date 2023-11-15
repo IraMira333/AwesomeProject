@@ -32,6 +32,7 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
+  const isAutorized = false;
 
   return (
     <NavigationContainer>
