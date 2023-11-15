@@ -31,7 +31,7 @@ const PostsScreen = () => {
   ];
   return (
     <View style={styles.container}>
-      <View style={styles.profileWrap}>
+      <View style={styles.userBox}>
         <Image
           source={avatarDefault}
           style={styles.avatar}
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     paddingTop: 32,
     backgroundColor: "white",
   },
-  profileWrap: {
+  userBox: {
     flexDirection: "row",
     gap: 8,
     alignItems: "flex-start",
@@ -76,8 +76,15 @@ const styles = StyleSheet.create({
     width: 60,
     borderRadius: 16,
   },
-  username: { color: "#212121", fontSize: 13, fontWeight: "700" },
-  email: { color: "#212121", fontSize: 11 },
+  username: {
+    color: "#212121",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  email: {
+    color: "#212121",
+    fontSize: 11,
+  },
 });
 
 export default PostsScreen;
