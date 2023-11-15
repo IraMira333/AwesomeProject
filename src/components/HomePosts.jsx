@@ -1,34 +1,37 @@
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 const HomePosts = ({ post }) => {
+  const navigation = useNavigation();
   const commentsExist = post.comments > 0;
   const foto = post.image;
   return (
     <View style={styles.postContainer}>
       <Image style={styles.postImage} source={foto} />
       <View style={styles.titleWrap}>
-        <Text style={styles.title}>{post.title}</Text>
+        <Text style={styles.postTitle}>{post.title}</Text>
       </View>
-      <View style={styles.postData}>
-        <View style={styles.statsWrap}>
+      <View style={styles.postInfoBox}>
+        <View style={styles.commentsBox}>
           <Pressable
             onPress={() => navigation.navigate("Comments", { postID: post.id })}
             style={({ pressed }) => [
-              styles.commentsWrap,
-              pressed && styles.pressedStyle,
+              styles.wrapGap6,
+              pressed && styles.pressed,
             ]}
           >
             <Feather
               name="message-circle"
               size={24}
               color={commentsExist ? "#FF6C00" : "#BDBDBD"}
-              style={styles.grayIcon}
+              style={styles.iconRotateY}
             />
             <Text
               style={[
-                styles.commentsNumber,
-                commentsExist && styles.likesNumber,
+                styles.commentsAmount,
+                commentsExist && styles.commentsExist,
               ]}
             >
               {post.comments}
@@ -37,17 +40,9 @@ const HomePosts = ({ post }) => {
         </View>
         <Pressable
           onPress={() => navigation.navigate("Map")}
-          style={({ pressed }) => [
-            styles.locationWrap,
-            pressed && styles.pressedStyle,
-          ]}
+          style={({ pressed }) => [styles.wrapGap6, pressed && styles.pressed]}
         >
-          <Feather
-            name="map-pin"
-            size={24}
-            color="#BDBDBD"
-            style={styles.grayIcon}
-          />
+          <Feather name="map-pin" size={24} color="#BDBDBD" />
           <Text style={styles.location}>{post.location}</Text>
         </Pressable>
       </View>
@@ -56,41 +51,65 @@ const HomePosts = ({ post }) => {
 };
 
 const styles = StyleSheet.create({
-  postContainer: { marginVertical: 16 },
+  postContainer: {
+    marginVertical: 16,
+  },
   postImage: {
     height: 240,
     width: "100%",
     borderRadius: 8,
     marginBottom: 2,
   },
-  title: {
+  postTitle: {
     paddingVertical: 8,
     color: "#212121",
     fontSize: 16,
     fontWeight: "400",
   },
-  displayName: {
-    paddingVertical: 8,
-    color: "#212121",
-    fontSize: 16,
-    fontWeight: "500",
+
+  titleWrap: {
+    flex: 1,
+    justifyContent: "flex-start",
+    flexDirection: "row",
   },
-  titleWrap: { flex: 1, justifyContent: "flex-start", flexDirection: "row" },
-  grayIcon: { transform: [{ rotateY: "180deg" }] },
-  statsWrap: {
+
+  commentsBox: {
     flexDirection: "row",
     columnGap: 20,
     alignItems: "center",
     justifyContent: "center",
   },
-  commentsNumber: { color: "#BDBDBD", fontSize: 16, paddingRight: 4 },
-  likesNumber: { color: "#212121", fontSize: 16 },
-  likesWrap: { flexDirection: "row", gap: 6 },
-  commentsWrap: { flexDirection: "row", gap: 6 },
-  locationWrap: { flexDirection: "row", gap: 6 },
-  location: { color: "#212121", fontSize: 16, textDecorationLine: "underline" },
-  pressedStyle: { backgroundColor: "#bdbdbd7a", borderRadius: 8 },
-  postData: { flexDirection: "row", justifyContent: "space-between" },
+  iconRotateY: {
+    transform: [{ rotateY: "180deg" }],
+  },
+  commentsAmount: {
+    color: "#BDBDBD",
+    fontSize: 16,
+    paddingRight: 4,
+  },
+  commentsExist: {
+    color: "#212121",
+  },
+  wrapGap6: {
+    flexDirection: "row",
+    gap: 6,
+  },
+
+  location: {
+    color: "#212121",
+    fontSize: 16,
+    textDecorationLine: "underline",
+  },
+
+  pressed: {
+    backgroundColor: "#bdbdbd7a",
+    borderRadius: 8,
+  },
+
+  postInfoBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });
 
 export default HomePosts;
