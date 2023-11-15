@@ -7,12 +7,17 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, Text, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
+
 import RegistrationScreen from "./src/Screens/RegistrationScreen";
 import LoginScreen from "./src/Screens/LoginScreen";
 import CreatePostsScreen from "./src/Screens/CreatePostsScreen";
+import PostsScreen from "./src/Screens/PostsScreen";
 
 const MainStack = createStackNavigator();
+const BottomTabs = createBottomTabNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -32,16 +37,22 @@ export default function App() {
     <NavigationContainer>
       {/* <View onLayout={onLayoutRootView}> */}
       <MainStack.Navigator initialRouteName="Login">
-        <MainStack.Screen
-          name="Registration"
-          component={CreatePostsScreen}
-          options={{ headerShown: false }}
-        />
-        <MainStack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
+        {!isAutorized ? (
+          <>
+            <MainStack.Screen
+              name="Registration"
+              component={PostsScreen}
+              options={{ headerShown: false }}
+            />
+            <MainStack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{ headerShown: false }}
+            />
+          </>
+        ) : (
+          "Text"
+        )}
       </MainStack.Navigator>
       {/* </View> */}
     </NavigationContainer>
